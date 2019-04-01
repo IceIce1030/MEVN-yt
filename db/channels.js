@@ -12,33 +12,12 @@ const schema = Joi.object().keys({
   })
 });
 
-const collection = db.get('videos');
+const collection = db.get('channels');
 
-// get all videos
+// get all channels
 function getAll() {
   return collection.find();
 }
-
-// get a channel's videos
-function getChannelVideos({
-  channelId
-}) {
-  console.log({
-    channelId
-  })
-  return collection.find({
-    channelId: channelId
-  });
-}
-
-// delete a video
-function deleVideo(_id) {
-  collection.remove({
-    videoId: _id
-  });
-  return 'delete a video success!';
-}
-
 
 function create(message) {
   if (!message.username) message.username = 'Anonymous';
@@ -54,7 +33,5 @@ function create(message) {
 
 module.exports = {
   create,
-  getAll,
-  getChannelVideos,
-  deleVideo
+  getAll
 };
