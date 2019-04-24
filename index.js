@@ -19,24 +19,24 @@ app.get('/', (req, res) => {
   });
 });
 
-// get all videos
+// 取得所有影片資料
 app.get('/videos', (req, res) => {
   videos.getAll().then((videos) => {
     res.json(videos);
   });
 });
 
-// get a chanel videos
+// 取得某頻道的影片資料
 app.get('/videos/:channel', (req, res) => {
   var _channelId = req.params.channel;
   videos.getChannelVideos({
     channelId: _channelId
   }).then((videos) => {
     res.json(videos);
-    console.log({
-      _channelId,
-      videos
-    })
+    // console.log({
+    //   _channelId,
+    //   videos
+    // })
   });
 });
 
@@ -49,14 +49,14 @@ app.delete('/videos/:videoId', (req, res) => {
 });
 
 
-// get all channels
+// 取得所有頻道資料
 app.get('/channels', (req, res) => {
   channels.getAll().then((channels) => {
     res.json(channels);
   });
 });
 
-// testing
+// 測試 post 
 app.post('/videos', (req, res) => {
   console.log(req.body);
   videos.create(req.body).then((message) => {
