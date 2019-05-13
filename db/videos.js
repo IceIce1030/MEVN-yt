@@ -16,7 +16,11 @@ const collection = db.get('videos');
 
 // get all videos
 function getAll() {
-  return collection.find();
+  return collection.find({}, {
+    sort: {
+      publishedAt: -1
+    }
+  });
 }
 
 // get a channel's videos
@@ -28,6 +32,10 @@ function getChannelVideos({
   })
   return collection.find({
     channelId: channelId
+  }, {
+    sort: {
+      publishedAt: -1
+    }
   });
 }
 
