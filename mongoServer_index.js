@@ -26,6 +26,25 @@ app.get('/videos', (req, res) => {
   });
 });
 
+// 取得某頁影片資料
+app.get('/videosPage/:channelId/:pages', (req, res) => {
+  var _page = req.params.pages;
+  var _channelId = req.params.channelId || 'all';
+  videos.getPageVideos({
+    myPage: _page,
+    channelId: _channelId
+  }).then((result) => {
+    return videos.getVideosCount(_channelId).then((count) => {
+      result.push({
+        total: count
+      });
+      return res.json(result);
+    });
+  });
+
+
+});
+
 // 取得某頻道的影片資料
 app.get('/videos/:channel', (req, res) => {
   var _channelId = req.params.channel;
@@ -33,10 +52,6 @@ app.get('/videos/:channel', (req, res) => {
     channelId: _channelId
   }).then((videos) => {
     res.json(videos);
-    // console.log({
-    //   _channelId,
-    //   videos
-    // })
   });
 });
 
